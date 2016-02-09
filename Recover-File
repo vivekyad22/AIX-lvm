@@ -1,1 +1,18 @@
 # AIX-lvm
+
+df -h
+
+lspv
+
+lsvg 
+
+lsvg -l rootvg
+
+lsvg | lsvg -li
+
+lslv -l lvname 
+
+mkdir /mnt/ROOT
+
+mount $lvname /mnt/ROOT
+
