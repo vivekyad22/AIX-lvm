@@ -4,6 +4,8 @@ df -h
 
 lspv
 
+lspv -l <pv>   
+
 lsvg 
 
 lsvg | lsvg -li
