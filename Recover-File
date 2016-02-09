@@ -38,6 +38,7 @@ Find the logical volume that has your Fedora root filesystem (mine proved
 to be LogVol00):
 $ sudo lvs
 
+df /
 
 cfgmgr 
 
