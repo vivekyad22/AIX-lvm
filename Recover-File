@@ -6,11 +6,15 @@ lspv
 
 lsvg 
 
-lsvg -l rootvg
-
 lsvg | lsvg -li
 
+lsvg -l rootvg
+
+lsvg -l rootvg
+
 lslv -l lvname 
+
+lsvg -p rootvg
 
 mkdir /mnt/ROOT
 
