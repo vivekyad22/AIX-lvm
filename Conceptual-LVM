@@ -63,6 +63,15 @@ lvcreate -L512M -s -n lvstuffbackup /dev/vgpool/lvstuff
 
 MANAGING SNAPSHOT AND RAID configurations using LVM
 
+# vgchange -a y
+
+This makes any logical volumes available to the Linux. Most boot CD’s will do it automatically some time during the boot process, but repeating the command won’t hurt.
+
+We can now easily extend the volume, by specifying the new number of PEs:
+
+# lvm lvresize -l 2261 /dev/MindbenderGroup/MindbenderHome
+
+It is crucial that you use the exact amount of space. If you reduce volume more than the filesytem you truncate the logical volume and you risk data loss!
 
 
 
