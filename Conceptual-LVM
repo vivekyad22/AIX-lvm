@@ -1,0 +1,117 @@
+LVM manages disk drives. It allows multiple drives and partitions to be combined into larger volume groups, assists in making backups through a snapshot, and allows for dynamic volume resizing. It can also provide mirroring similar to a RAID 1 array.
+
+physical volumes
+These are physical disks or partitions such as /dev/sda3 or /dev/sdb.
+volume groups
+These are named groups of physical volumes that can be manipulated by the administrator. The number of physical volumes that make up a volume group is arbitrary. Physical volumes can be dynamically added or removed from a volume group.
+logical volumes
+Volume groups may be subdivided into logical volumes. Each logical volume can then be individually formatted as if it were a regular Linux partition. Logical volumes may be dynamically resized by the administrator according to need.
+
+pvdisplay 
+
+Creating a Logical Volume
+Logical volumes are the partitions that your operating system uses in LVM. To create a logical volume we first need to have a physical volume and volume group.
+
+Create LVM partition using - 
+fdisk /dev/sdb
+
+pvcreate /dev/sdb1
+
+vgcreate vgpool /dev/sdb1
+
+lvcreate -L 3G -n lvstuff vgpool
+
+mkfs -t ext3 /dev/vgpool/lvstuff
+
+
+EXTENT SHRINK VOLUMES
+
+Instead, you can add a new hard drive and extend your volume group on the fly. Or if you have a hard drive that isn’t used you can remove it from the volume group to shrink your logical volume.
+
+There are three basic tools for making physical volumes, volume groups, and logical volumes bigger or smaller.
+
+Note: Each of these commands will need to be preceded by pv, vg, or lv depending on what you are working with.
+
+resize – can shrink or expand physical volumes and logical volumes but not volume groups
+extend – can make volume groups and logical volumes bigger but not smaller
+reduce – can make volume groups and logical volumes smaller but not bigger
+
+vgextend vgpool /dev/sdc1
+
+lvextend -L8G /dev/vgpool/lvstuff   , makes it of 8GB
+
+lvextend -L+3G /dev/vgpool/lvstuff  , Adds 3GB to existing LV
+
+And lastly we will need to extend the actual file system.
+
+resize2fs /dev/vgpool/lvstuff
+
+Shrink Logical Volume
+
+If you wanted to remove a hard drive from a volume group you would need to follow the above steps in reverse order and use lvreduce and vgreduce instead.
+
+resize file system (make sure to move files to a safe area of the hard drive before resizing)
+reduce logical volume (instead of + to extend you can also use – to reduce by size)
+remove hard drive from volume group with vgreduce
+
+Create New Snapshot
+
+To create a snapshot of lvstuff use the lvcreate command like before but use the -s flag.
+
+lvcreate -L512M -s -n lvstuffbackup /dev/vgpool/lvstuff
+
+
+MANAGING SNAPSHOT AND RAID configurations using LVM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
