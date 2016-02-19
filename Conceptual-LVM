@@ -74,7 +74,38 @@ We can now easily extend the volume, by specifying the new number of PEs:
 It is crucial that you use the exact amount of space. If you reduce volume more than the filesytem you truncate the logical volume and you risk data loss!
 
 
+When you create a snapshot, you create a new Logical Volume to act as a clone of the original Logical Volume. The snapshot volume initially does not use any space, but as changes are made to the original volume, the changed blocks are copied to the snapshot volume before they are changed, in order to preserve them. This means that the more changes you make to the origin, the more space the snapshot needs.
 
+ sudo lvcreate -s -n snap -L 5g foo/bar 
+
+This will create a snapshot named snap of the original Logical Volume bar and allocate 5 GB of space for it.
+While you have the snapshot, you can mount it if you wish and will see the original filesystem as it appeared when you made the snapshot. 
+
+If you take a snapshot of your root Logical Volume, and then upgrade some packages, or to the next whole distribution release, and then decide it isn't working out, you can merge the snapshot back into the origin volume, effectively reverting to the state at the time you made the snapshot. To do this, you simply run:
+
+ sudo lvconvert --merge foo/snap 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 
 
 
