@@ -1,3 +1,5 @@
+Configuration & management of Logical Volume Manager ( LVM ) for creating large Volume Groups & Performing operations online .
+
 LVM manages disk drives. It allows multiple drives and partitions to be combined into larger volume groups, assists in making backups through a snapshot, and allows for dynamic volume resizing. It can also provide mirroring similar to a RAID 1 array.
 
 physical volumes
